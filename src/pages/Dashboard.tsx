@@ -14,6 +14,8 @@ const token = localStorage.getItem('token') || '';
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  console.log(loading)
+
   useEffect(() => {
     const fetchProductCount = async () => {
       setLoading(true);
