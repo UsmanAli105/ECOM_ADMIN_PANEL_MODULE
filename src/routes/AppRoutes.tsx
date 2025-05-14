@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard';
 import ProductsAdd from '../pages/ProductsAdd';
 import ProductsList from '../pages/ProductsList';
 import Orders from '../pages/Orders';
+import Chat from '../pages/Chat';
 
 const AppRoutes: React.FC = () => (
   <Routes>
@@ -44,6 +45,14 @@ const AppRoutes: React.FC = () => (
         </ProtectedRoute>
       }
     />
+    <Route
+      path="/chat"
+      element={
+        <ProtectedRoute>
+          <Chat />
+        </ProtectedRoute>
+      }
+    />    
     <Route path="/" element={<Navigate to="/dashboard" replace />} />
     <Route path="*" element={<Navigate to="/dashboard" replace />} />
   </Routes>

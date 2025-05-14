@@ -15,6 +15,29 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
   // Sidebar toggle for mobile/desktop
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
 
+type Role = "ADMIN" | "MODERATOR" | "USER";
+
+const role: Role = userObj.role === "ADMIN" || userObj.role === "MODERATOR" || userObj.role === "USER" ? userObj.role : "USER";
+
+const NAV_ITEMS = {
+  ADMIN: [
+    { to: "/dashboard", icon: "bi-house-door", label: "Dashboard" },
+    { to: "/products/add", icon: "bi-plus-circle", label: "Add Products" },
+    { to: "/products/list", icon: "bi-box-seam", label: "Product List" },
+    { to: "/orders", icon: "bi-receipt", label: "Orders" },
+  ],
+  MODERATOR: [
+    { to: "/products/list", icon: "bi-box-seam", label: "Product List" },
+    { to: "/orders", icon: "bi-receipt", label: "Orders" },
+  ],
+  USER: [
+    { to: "/products/list", icon: "bi-box-seam", label: "Product List" },
+    { to: "/orders", icon: "bi-receipt", label: "Orders" },
+    { to: "/chat", icon: "bi-receipt", label: "Chat" },
+  ],
+};
+
+
   return (
     <div className={"dashboard-layout" + (sidebarOpen ? " sidebar-open" : "")}>
       {/* Sidebar */}
@@ -24,7 +47,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
       >
         <div className="sidebar-header d-flex align-items-center justify-content-between">
           <span className="fw-bold" style={{ letterSpacing: 1 }}>
-            {userObj.role} Panel
+            {role} Panel
           </span>
           <button
             className="btn btn-link text-white d-lg-none"
@@ -34,35 +57,16 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
             <i className="bi bi-x-lg"></i>
           </button>
         </div>
+      {NAV_ITEMS[role]?.map((item) => (
         <NavLink
-          to="/dashboard"
-          className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-          end
-        >
-          <i className="bi bi-house-door"></i>
-          <span>Dashboard</span>
-        </NavLink>
-        <NavLink
-          to="/products/add"
+          key={item.to}
+          to={item.to}
           className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
         >
-          <i className="bi bi-plus-circle"></i>
-          <span>Add Products</span>
+          <i className={`bi ${item.icon}`}></i>
+          <span>{item.label}</span>
         </NavLink>
-        <NavLink
-          to="/products/list"
-          className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-        >
-          <i className="bi bi-box-seam"></i>
-          <span>Product List</span>
-        </NavLink>
-        <NavLink
-          to="/orders"
-          className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-        >
-          <i className="bi bi-receipt"></i>
-          <span>Orders</span>
-        </NavLink>
+      ))}
       </aside>
 
       {/* Main Content */}
@@ -85,7 +89,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({
               <i className="bi bi-list" style={{ fontSize: 24 }}></i>
             </button>
             <span className="fs-4 fw-bold" style={{ letterSpacing: 1 }}>
-              {userObj.role} Dashboard
+              {role} Dashboard
             </span>
           </div>
           <button
