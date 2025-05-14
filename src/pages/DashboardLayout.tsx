@@ -27,12 +27,11 @@ const NAV_ITEMS = {
     { to: "/orders", icon: "bi-receipt", label: "Orders" },
   ],
   MODERATOR: [
+    { to: "/dashboard", icon: "bi-house-door", label: "Dashboard" },
     { to: "/products/list", icon: "bi-box-seam", label: "Product List" },
     { to: "/orders", icon: "bi-receipt", label: "Orders" },
   ],
   USER: [
-    { to: "/products/list", icon: "bi-box-seam", label: "Product List" },
-    { to: "/orders", icon: "bi-receipt", label: "Orders" },
     { to: "/chat", icon: "bi-receipt", label: "Chat" },
   ],
 };
