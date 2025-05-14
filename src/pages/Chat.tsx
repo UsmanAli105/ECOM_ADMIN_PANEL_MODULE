@@ -39,7 +39,7 @@ const Chat = () => {
 
 
     try {
-      const response = await axios.post("http://localhost:5000/ask", {
+      const response = await axios.post("http://35.200.167.252:5000/ask", {
         user_id: user.userId,
         token: token,
         message: messageInput,
